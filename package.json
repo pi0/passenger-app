@@ -6,6 +6,6 @@
     "start": "node app.mjs"
   },
   "devDependencies": {
-    "srvx": "^0.10.0"
+    "srvx": "^0.10.1"
   }
 }
