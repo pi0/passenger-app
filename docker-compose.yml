@@ -1,0 +1,20 @@
+services:
+  passenger:
+    image: phusion/passenger-nodejs:latest
+    container_name: passenger-node
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/home/app/webapp
+      - ./webapp.conf:/etc/nginx/sites-enabled/webapp.conf
+    environment:
+      NODE_ENV: development
+    command: >
+      bash -lc "
+        apt-get update && apt-get install -y inotify-tools &&
+        rm -f /etc/service/nginx/down &&
+        rm -f /etc/nginx/sites-enabled/default &&
+        mkdir -p /home/app/webapp/tmp &&
+        (inotifywait -m -e modify /home/app/webapp/app.mjs | while read; do touch /home/app/webapp/tmp/restart.txt; done &) &&
+        /sbin/my_init
+      "

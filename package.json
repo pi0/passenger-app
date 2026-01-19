@@ -1,0 +1,11 @@
+{
+  "name": "passenger-node-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node app.mjs"
+  },
+  "devDependencies": {
+    "srvx": "^0.10.0"
+  }
+}
